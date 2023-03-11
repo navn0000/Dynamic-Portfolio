@@ -19,6 +19,7 @@ const createSkills = asyncHandler(async (req, res)=>{
         name: req.body.name,
         experience: req.body.experience,
         description: req.body.description,
+        user_id: req.user.id,
     });
     res.status(201).json(skillview);
 });
@@ -48,11 +49,11 @@ const findoneSkills = asyncHandler(async(req, res)=>{
     res.status(200).json({message: `Detailed skills for ${req.params.id}`, skillView})
 });
 
-const deleteSkills = asyncHandler(async(req, res)=>{
+const deleteSkills = asyncHandler(async (req, res)=>{
     const skillView = await Skills.findById(req.params.id);
     if(!skillView){
         res.status(404);
-        throw new Error("cannot fount    ")
+        throw new Error("cannot found")
     }
     await Skills.remove();
     res.status(200).json(skillView)

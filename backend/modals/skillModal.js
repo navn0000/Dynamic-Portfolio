@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 const  Schema = mongoose.Schema;
 
 let skillSet = new Schema({
+    user_id:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "user"
+    },
     name: {
         type: String,
     },
@@ -16,24 +21,6 @@ let skillSet = new Schema({
 {
     timestamps: true,
 }
-)
-// const skillSchema = mongoose.Schema({
-//     name:{
-//         type: String,
-//         required: [true, "please add the skill name"]
-//     },
-//     expereince:{
-//         type: String,
-//         required: [true, "please add the experience name"]
-//     },
-//     description:{
-//         type: String,
-//         required: [true, "please add the descriotion name"]
-//     }
-// }, 
-// {
-//     timestamps: true,
-// }
-// );
+);
 const modal = mongoose.model("Skill", skillSet);
 module.exports = modal;
