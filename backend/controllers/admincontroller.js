@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../modals/adminModal');
 
 const registeradmin = asyncHandler(async (req, res) =>{
-    const {username, email, password} = req.body;
-    if(!username || !email || !password){
+    const {adminname, email, password} = req.body;
+    if(!adminname || !email || !password){
         res.status(400);
         throw new Error("All the fields are required")
     }
@@ -17,7 +17,7 @@ const registeradmin = asyncHandler(async (req, res) =>{
         const hashedPassword = await bcrypt.hash(password, 10)
         console.log(hashedPassword, "hased")
         const user = await User.create({
-            username,
+            adminname,
             email,
             password: hashedPassword,
         });
@@ -44,15 +44,15 @@ const loginadmin = asyncHandler(async (req, res) =>{
         const accessToken = jwt.sign(
             {
             user:{
-                username: user.username,
+                adminname: user.adminname,
                 email: user.email,
                 id: user.id,
             },
         }, 
         process.env.ACCESS_TOKEN_SECERT,
-        { expiresIn: "1m"}
+        { expiresIn: "60m"}
         );
-        res.status(200).json({ accessToken });
+        res.status(200).json({ accessToken});
     } else {
         res.status(401);
        throw new Error("email or password is not valid")
@@ -62,5 +62,8 @@ const loginadmin = asyncHandler(async (req, res) =>{
 const currentadmin = asyncHandler(async (req, res) =>{
     res.json(req.user)
 })
+
+
+
 
 module.exports = {registeradmin, loginadmin, currentadmin}
