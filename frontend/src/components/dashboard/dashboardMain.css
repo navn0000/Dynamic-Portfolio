@@ -1,0 +1,12 @@
+body{
+    background-color: black !important;
+}
+.dashboard-outer{
+    margin-top: 20px;
+    padding: 20px;
+}
+.logout-btn{
+    background-color: goldenrod !important;
+    border: 1px solid white !important;
+    border-radius: 5px !important;
+}

@@ -1,0 +1,13 @@
+.sidebar-outer{
+    background-color: black;
+    height: 100vh;
+}
+
+.sidebar-outer ul li{
+    list-style: none !important;
+    text-decoration: none !important;
+    color: white !important;
+}
+.sidebar-outer a{
+    text-decoration: none !important;
+}
